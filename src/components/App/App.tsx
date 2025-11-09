@@ -2,7 +2,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import fetchMovie from "../../services/movieService";
 import { useState } from "react";
 import type { Movie } from "../../types/movie";
-import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import MovieModal from "../MovieModal/MovieModal";
@@ -39,10 +38,6 @@ export default function App() {
   const closeModal = () => {
     setMovieForModal(null);
   };
-
-  useEffect(() => {
-    console.log(movies);
-  }, [movies]);
 
   return (
     <>
