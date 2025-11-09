@@ -19,12 +19,15 @@ export default function App() {
       setIsError(false);
       setMovies([]);
       setIsLoader(true);
+
       const results = await fetchMovie(query);
-      if (results.results.length === 0) {
+
+      if (results.length === 0) {
         toast("No movies found for your request.");
         return;
       }
-      setMovies(results.results);
+
+      setMovies(results);
     } catch {
       setIsError(true);
     } finally {
@@ -42,8 +45,8 @@ export default function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {isLoader === true && <Loader />}
-      {isError === true && <ErrorMessage />}
+      {isLoader && <Loader />}
+      {isError && <ErrorMessage />}
       <Toaster />
       <MovieGrid onSelect={handleModal} movies={movies} />
       {movieForModal && (
