@@ -1,5 +1,4 @@
 import axios from "axios";
-import type { AxiosResponse } from "axios";
 import type { Movie } from "../types/movie";
 
 const token = import.meta.env.VITE_TMDB_TOKEN as string;
@@ -25,17 +24,14 @@ export default async function fetchMovie(
   query: string,
   page = 1
 ): Promise<Movie[]> {
-  const response: AxiosResponse<ApiMovieResponse> = await instance.get(
-    "/search/movie",
-    {
-      params: {
-        query,
-        page,
-        include_adult: false,
-        language: "en-US",
-      },
-    }
-  );
+  const response = await instance.get<ApiMovieResponse>("/search/movie", {
+    params: {
+      query,
+      page,
+      include_adult: false,
+      language: "en-US",
+    },
+  });
 
   return response.data.results;
 }
